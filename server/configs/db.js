@@ -6,18 +6,13 @@ const connectDb = async () => {
       console.log("Database connected successfully");
     });
 
-    let mongodbURI = process.env.MONGODB_URI;
-    const projectName = "Resume-Builder";
+    const mongodbURI = process.env.MONGODB_URI;
 
     if (!mongodbURI) {
       throw new Error("MONGODB_URI environment variable not set");
     }
 
-    if (mongodbURI.endsWith("/")) {
-      mongodbURI = mongodbURI.slice(0, -1);
-    }
-
-    await mongoose.connect(`${mongodbURI}/${projectName}`);
+    await mongoose.connect(mongodbURI);
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
   }
